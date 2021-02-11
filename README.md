@@ -6,12 +6,9 @@ Perform  `kmeans` k-means on a data matrix.
 
 Input projection|.
 ---|---
-`x-axis`        | type, description 
-`y-axis`        | type, description 
-`row`           | type, description 
-`column`        | type, description 
-`colors`        | type, description 
-`labels`        | type, description 
+`row`   | represents the variables (e.g. channels, markers)
+`col`   | represents the observations (e.g. cells) 
+`y-axis`| is the value of measurements (e.g. signal of the channel/marker)
 
 Input parameters|.
 ---|---
@@ -21,15 +18,13 @@ Input parameters|.
 
 Output relations|.
 ---|---
-`output_var`        | output relation
-`Operator view`        | view of the Shiny application
+`cluster`| character, cluster label
 
 ##### Details
 
-Details on the computation.
+See `kmeans` in base R.
 
 ##### See Also
 
-[template_shiny_operator](https://github.com/tercen/template_shiny_operator)
-, [template_docker_operator](https://github.com/tercen/template_docker_operator)
+[flowsom_operator](https://github.com/tercen/flowsom_operator), [clusterx_operator](https://github.com/tercen/clusterx_operator)
 
