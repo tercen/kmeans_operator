@@ -8,10 +8,12 @@ data = (ctx = tercenCtx())  %>%
 
 colnames(data) = paste('c', colnames(data), sep='')
 
+seed <- NULL
+if(!ctx$op.value('seed') == "NULL") seed <- as.integer(ctx$op.value('seed'))
 
-dataX = kmeans(data, centers=as.integer(ctx$op.value('number of clusters')))
+dataK = kmeans(data, centers = as.integer(ctx$op.value('centers')), iter.max = as.integer(ctx$op.value('iter.max')), nstart = as.integer(ctx$op.value('nstart')))
 
-data.frame(.ci = seq(from=0,to=length(dataX$cluster)-1),
-           cluster=paste0("cluster",dataX$cluster)) %>%
+data.frame(.ci = seq(from=0,to=length(dataK$cluster)-1),
+           cluster=paste0("cluster", dataK$cluster)) %>%
   ctx$addNamespace() %>%
   ctx$save()

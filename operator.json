@@ -7,9 +7,27 @@
   "properties": [
   {
     "kind": "DoubleProperty",
-    "name": "number of clusters",
+    "name": "centers",
     "defaultValue": 10,
     "description": "Number of clusters."
+  },
+    {
+    "kind": "DoubleProperty",
+    "name": "iter.max",
+    "defaultValue": 10,
+    "description": "Max number of interations."
+  },
+    {
+    "kind": "DoubleProperty",
+    "name": "nstart",
+    "defaultValue": 1,
+    "description": "How many random sets."
+  },
+    {
+    "kind": "StringProperty",
+    "name": "seed",
+    "defaultValue": "NULL",
+    "description": "random seed"
   }
   ]
 }

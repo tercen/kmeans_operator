@@ -15,7 +15,9 @@ Input projection|.
 
 Input parameters|.
 ---|---
-`input_var`        | parameter description
+`centers`        | parameter description
+`iter.max`       | the maximum number of iterations allowed
+`nstart`         | if centers is a number, how many random sets should be chosen?
 
 Output relations|.
 ---|---
