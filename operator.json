@@ -1,30 +1,15 @@
-{
-  "name": "Template R operator",
-  "description": "Return the medium value of a cell",
-  "tags": ["template"],
+  {
+  "name": "K-means",
+  "description": "Perform k-means clustering",
+  "tags": ["multivariate statistics"],
   "authors": ["tercen"],
-  "urls": ["https://github.com/tercen/template_R_operator"],
+  "urls": ["https://github.com/tercen/kmeans_operator"],
   "properties": [
-   {
-    "kind": "StringProperty",
-    "name": "string_example",
-    "defaultValue": "example",
-    "description": "description parameter 1"
-    },
-    {
-    "kind": "EnumeratedProperty",
-    "name": "list_example",
-    "defaultValue": "value1",
-    "values": [
-      "value1",
-      "StringProperty",
-      "DoubleProperty",
-      "BooleanProperty",
-      "EnumeratedProperty"
-    ],
-    "description": "description parameter 2"
+  {
+    "kind": "DoubleProperty",
+    "name": "number of clusters",
+    "defaultValue": 10,
+    "description": "Number of clusters."
   }
   ]
 }
-
-
