@@ -36,13 +36,6 @@
       "Repository": "CRAN",
       "Hash": "f4605d46264b35f53072fc9ee7ace15f"
     },
-    "MASS": {
-      "Package": "MASS",
-      "Version": "7.3-51.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "c64a9edaef0658e36905934c5a7aa499"
-    },
     "R6": {
       "Package": "R6",
       "Version": "2.4.1",
@@ -70,13 +63,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "e9f705633dc932bfd5b02b17a5053a06"
-    },
-    "class": {
-      "Package": "class",
-      "Version": "7.3-15",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "4fba6a022803b6c3f30fd023be3fa818"
     },
     "cli": {
       "Package": "cli",
