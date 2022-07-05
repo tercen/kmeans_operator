@@ -3,7 +3,7 @@
   "name": "test1",
   "namespace": "ds0",
   "inputDataUri": "test1_in.csv",
-  "outputDataUri": ["test1_out_1.csv", "test1_out_2.csv", "test1_out_3.csv"],
+  "outputDataUri": ["test1_out_1.csv", "test1_out_2.csv"],
   "columns": [
     "Observation"
   ],
