@@ -17,9 +17,10 @@ colnames(data) <- paste('c', colnames(data), sep='')
 seed <- NULL
 if(!ctx$op.value('seed') == "NULL") seed <- as.integer(ctx$op.value('seed'))
 
-centers <- ctx$op.value("centers",as.integer, "10")
-iter.max <- ctx$op.value("iter.max",as.integer, "10")
-nstart <- ctx$op.value("nstart",as.integer, "1")
+
+centers<-ifelse(is.null(ctx$op.value('centers')), 10, as.integer(ctx$op.value('centers')))
+iter.max<-ifelse(is.null(ctx$op.value('iter.max')), 10, as.integer(ctx$op.value('iter.max')))
+nstart<-ifelse(is.null(ctx$op.value('nstart')), 1, as.integer(ctx$op.value('nstart')))
 
 #seed<-42
 #centers<-2
