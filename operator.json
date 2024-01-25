@@ -1,6 +1,6 @@
 {
   "name": "K-means",
-  "description": "Perform k-means clustering",
+  "description": "Clusters data points using the K-means algorithm.",
   "tags": [
     "clustering"
   ],
