@@ -1,33 +1,39 @@
-  {
+{
   "name": "K-means",
   "description": "Perform k-means clustering",
-  "tags": ["multivariate statistics"],
-  "authors": ["tercen"],
-  "urls": ["https://github.com/tercen/kmeans_operator"],
+  "tags": [
+    "clustering"
+  ],
+  "authors": [
+    "tercen"
+  ],
+  "urls": [
+    "https://github.com/tercen/kmeans_operator"
+  ],
   "properties": [
-  {
-    "kind": "DoubleProperty",
-    "name": "centers",
-    "defaultValue": 10,
-    "description": "Number of clusters."
-  },
     {
-    "kind": "DoubleProperty",
-    "name": "iter.max",
-    "defaultValue": 10,
-    "description": "Max number of interations."
-  },
+      "kind": "DoubleProperty",
+      "name": "centers",
+      "defaultValue": 10,
+      "description": "Number of clusters."
+    },
     {
-    "kind": "DoubleProperty",
-    "name": "nstart",
-    "defaultValue": 1,
-    "description": "How many random sets."
-  },
+      "kind": "DoubleProperty",
+      "name": "iter.max",
+      "defaultValue": 10,
+      "description": "Max number of interations."
+    },
     {
-    "kind": "StringProperty",
-    "name": "seed",
-    "defaultValue": "NULL",
-    "description": "random seed"
-  }
+      "kind": "DoubleProperty",
+      "name": "nstart",
+      "defaultValue": 1,
+      "description": "How many random sets."
+    },
+    {
+      "kind": "StringProperty",
+      "name": "seed",
+      "defaultValue": "NULL",
+      "description": "random seed"
+    }
   ]
 }
