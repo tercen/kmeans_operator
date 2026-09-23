@@ -1,0 +1,119 @@
+{
+  "name": "K-means (Rust)",
+  "description": "Clusters data points using the K-means algorithm. Rust port of tercen/kmeans_operator (R stats::kmeans, Hartigan-Wong) — parity: bitwise cluster labels and centres against the R operator on identical seeded inputs (same sample.int initial centres), including the nstart re-sampling; the crosstab is streamed (never materialised as R's long-format table).",
+  "tags": [
+    "clustering"
+  ],
+  "authors": [
+    "tercen"
+  ],
+  "urls": [
+    "https://github.com/tercen/kmeans_operator"
+  ],
+  "container": "ghcr.io/tercen/kmeans_rust_operator:0.1.0",
+  "properties": [
+    {
+      "kind": "DoubleProperty",
+      "name": "centers",
+      "defaultValue": 10,
+      "description": "Number of clusters."
+    },
+    {
+      "kind": "DoubleProperty",
+      "name": "iter.max",
+      "defaultValue": 10,
+      "description": "Max number of iterations."
+    },
+    {
+      "kind": "DoubleProperty",
+      "name": "nstart",
+      "defaultValue": 1,
+      "description": "How many random sets."
+    },
+    {
+      "kind": "StringProperty",
+      "name": "seed",
+      "defaultValue": "NULL",
+      "description": "random seed; a number runs R's set.seed(seed) (reproducible, bitwise-parity path), 'NULL' is unreproducible in R and draws OS entropy here"
+    }
+  ],
+  "operatorSpec": {
+    "kind": "OperatorSpec",
+    "ontologyUri": "https://tercen.com/_ontology/tercen",
+    "ontologyVersion": "0.0.1",
+    "inputSpecs": [
+      {
+        "kind": "CrosstabSpec",
+        "metaFactors": [
+          {
+            "kind": "MetaFactor",
+            "name": "Variable",
+            "type": "",
+            "description": "Variable identifiers (channels, markers).",
+            "ontologyMapping": "variable",
+            "crosstabMapping": "row",
+            "cardinality": "1..n",
+            "factors": []
+          },
+          {
+            "kind": "MetaFactor",
+            "name": "Observation",
+            "type": "",
+            "description": "Observation identifiers (cells).",
+            "ontologyMapping": "observation",
+            "crosstabMapping": "column",
+            "cardinality": "1..n",
+            "factors": []
+          }
+        ],
+        "axis": [
+          {
+            "kind": "AxisSpec",
+            "metaFactors": [
+              {
+                "kind": "MetaFactor",
+                "name": "Measurement",
+                "type": "double",
+                "description": "Measurement values (signal of the channel/marker).",
+                "ontologyMapping": "measurement",
+                "crosstabMapping": "y",
+                "cardinality": "1",
+                "factors": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "outputSpecsV2": [
+      {
+        "kind": "OperatorJoinSpec",
+        "joinOperators": [
+          {
+            "kind": "JoinOperator",
+            "joinType": "left",
+            "leftPair": {
+              "kind": "ColumnPair",
+              "lColumns": [
+                "Observation"
+              ],
+              "rColumns": [
+                "Observation"
+              ]
+            },
+            "rightRelation": {
+              "kind": "TableRelation",
+              "attributes": [
+                {
+                  "kind": "Attribute",
+                  "name": "cluster",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
