@@ -45,7 +45,9 @@ fn memory_bench_10m_cells() {
 
     let t = std::time::Instant::now();
     // Initial centres: the first k points, as the wrapper would hand over.
-    let centers: Vec<f64> = (0..5).flat_map(|i| sums[i * p..(i + 1) * p].to_vec()).collect();
+    let centers: Vec<f64> = (0..5)
+        .flat_map(|i| sums[i * p..(i + 1) * p].to_vec())
+        .collect();
     let result = kmns(&sums, m, p, &mut centers.clone(), 5, 10, 50 * m);
     let dt = t.elapsed().as_secs_f64();
     let peak = peak_rss_kb();
@@ -53,6 +55,10 @@ fn memory_bench_10m_cells() {
         "10M cells: gather peak {before_gather} kB, after mean {before_kmeans} kB, \
          final peak {peak} kB ({} MB), kmeans {dt:.1}s, {} clusters",
         peak / 1024,
-        result.cluster.iter().collect::<std::collections::HashSet<_>>().len()
+        result
+            .cluster
+            .iter()
+            .collect::<std::collections::HashSet<_>>()
+            .len()
     );
 }
