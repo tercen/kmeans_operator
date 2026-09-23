@@ -1,0 +1,74 @@
+name: Release kmeans_rust_operator
+
+# Builds and pushes the Rust operator image when a `kmeans-rust-X.Y.Z` tag is cut.
+#
+# NOTE for the deployer: `tercenctl operator install` has no --dir option — it
+# installs the manifest at the repository root, which is the R operator's. The
+# install-check step therefore cannot run for this subdirectory manifest until
+# the install flow knows about it (move the manifest to the root, a separate
+# repo, or subdir support in tercenctl). The image push below is unconditional
+# on the tag; the install-check must be added before this repo's first Rust
+# release is trusted (create-rust-operator §9: a red release burns a patch
+# number — here, an unchecked one is worse).
+
+on:
+  push:
+    tags:
+      - 'kmeans-rust-[0-9]+.[0-9]+.[0-9]+'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: tercen/kmeans_rust_operator
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check the tag matches the manifest pin
+        working-directory: kmeans_rust_operator
+        run: |
+          pin=$(jq -r '.container | split(":")[1]' operator.json)
+          tag="${GITHUB_REF##*/}"
+          test "kmeans-rust-$pin" = "$tag" || {
+            echo "tag $tag does not match the manifest pin kmeans-rust-$pin"; exit 1; }
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3.3.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5.5.1
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=match,pattern=kmeans-rust-(.*),group=1
+          # No `latest`: the manifest pins an exact version (create-rust-operator §9).
+          flavor: |
+            latest=false
+
+      - name: Build and push Docker image
+        id: push
+        uses: docker/build-push-action@v6.7.0
+        with:
+          context: kmeans_rust_operator
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # Reuse the layers ci.yml built for this commit: ~13 min cold, ~3 min warm. A tag is only
+          # installable once this push finishes, so the cache shortens the window in which an
+          # install fails with `manifest unknown`. On a miss this is simply the old build time.
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

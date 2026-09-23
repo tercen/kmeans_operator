@@ -1,0 +1,29 @@
+{
+  "kind": "OperatorUnitTest",
+  "name": "kmeans_rust_test1",
+  "namespace": "ds0",
+  "inputDataUri": "test1_in.csv",
+  "outputDataUri": ["test1_out_1.csv", "test1_out_2.csv", "test1_out_3.csv"],
+  "columns": [
+    "Observation"
+  ],
+  "rows": ["Variable"],
+  "colors": [],
+  "labels": [],
+  "yAxis": "y_values",
+  "xAxis": "",
+  "propertyValues": [
+    {
+    "kind": "PropertyValue",
+    "name": "centers",
+    "value": "2"
+    },
+    {
+    "kind": "PropertyValue",
+    "name": "seed",
+    "value": "42"
+  }
+  ],
+  "generatedOn": "2026-09-23",
+  "version": ""
+}
